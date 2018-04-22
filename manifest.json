@@ -3,16 +3,23 @@
   "name":"keyword extension",
   "version":"1.0",
   "description":"A keyword extension",
+  "options_page": "options.html",
+  "permissions": ["activeTab", "declarativeContent", "storage"],
   "icons":{
     "128":"img/icon128.png",
     "48":"img/icon48.png",
     "16":"img/icon16.png"
   },
-  "browser_action":{
-    "default_icon":"img/icon16.png",
-    "default_popup":"popup.html"
+  "page_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "img/icon16.png",
+      "48": "img/icon48.png",
+      "128": "img/icon128.png"
+    }
   },
-  "permissions": [
-    "storage"
-  ]
+  "background": {
+    "scripts": ["js/background.js"],
+    "persistent": false
+  }
 }
