@@ -124,8 +124,8 @@
 		// use default for 1st time
 		var colorGroups = Object.keys(wordGroupsDict);
 		if (colorGroups.length === 0) {
-			colorGroups = ["C72E04", "FA9507", "CACF44", "27AB99"].slice(1);
-			colorGroups.forEach( colorGroup => createNewGroupInDict(wordGroupsDict, colorGroup) );
+			colorGroups = ["C72E04", "4CAF50"].slice(1);
+			colorGroups.forEach( colorGroup => createNewGroupInDict(wordGroupsDict, colorGroup));
 		}
 
 		// remove template and append initialized sections
