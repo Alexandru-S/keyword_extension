@@ -1,5 +1,6 @@
-// UI creation
+// UI creation because i dont care anymore
 !function() {
+    console.log("popup.js");
 
 	"use strict";
 
@@ -17,6 +18,7 @@
 		toggleCheckbox.checked = wordGroupsDict[bgColorCode].isOn;
 		toggleCheckbox.addEventListener("change", wordGroupToogleHandlerFactory(wordGroupsDict));
 		handlingIndex++;
+		console.log("handlingIndes",handlingIndex);
 
 		var toggleLabel = sectionNode.getElementsByClassName(classNames[handlingIndex])[0];
 		toggleLabel.id = classNames[handlingIndex].concat("-", bgColorCode);
@@ -52,6 +54,7 @@
 	/*|                 load UI data and event binding                 |*/
 	/*|================================================================|*/
 	var getDefaultWordGroup = function (groupName) {
+	    console.log("default group");
 		return {
 			groupName: groupName,
 			isOn: false,
@@ -76,7 +79,7 @@
 		chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
 			var messageBody = wordGroupsDict;
 			chrome.tabs.sendMessage(tabs[0].id, messageBody, function(response) {
-				// console.log(response.content);
+			    //console.log("response.content",response.content);
 			});
 		});
 	};
@@ -92,6 +95,7 @@
 	var wordListChangeHandlerFactory = function (wordGroupsDict) {
 		return function (event) {
 			var groupName = event.target.dataset.bgColor;
+			//console.log("groupName.length",groupName.length);
 			var wordGroup = wordGroupsDict[groupName];
 			wordGroup.words = event.target.value.match(/[^\s]+/g) || [];
 
@@ -133,6 +137,7 @@
 		colorGroups.forEach(function (bgc) {
 			mainBlock.appendChild(initSectionByBgColorFromTemplate(sessionTemplate, bgc, wordGroupsDict));
 		});
+
 		newGroupForm.addEventListener("submit", function (event) {
 			event.preventDefault();
 			if (colorInputBox.value && colorInputBox.value.length > 0 && colorInputBox.checkValidity()) {

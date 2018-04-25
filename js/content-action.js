@@ -1,7 +1,19 @@
+
+
+
 !function () {
 	"use strict";
 
-	// init highlight CSS
+
+
+    var word_count = 0;
+    var word_stuff = [];
+
+
+
+
+
+    // init highlight CSS
 	var ruleExistenceDict = {};
 	var sheet = (function() {
 		var style = document.createElement("style");
@@ -12,9 +24,11 @@
 
 	// highlight word in DOM (textnode only)
 	var highlightWordInTextNodeOnly = function (word, bgColorCode) {
+	    var count_word = 0;
 
 		// skip empty word
 		if (word == null || word.length === 0) return;
+
 
 		// DOM tree walker
 		var wordRegex = new RegExp(word, "gi");
@@ -53,6 +67,7 @@
 					wordRange.setStart(n, startingIndex);
 					wordRange.setEnd(n, startingIndex + word.length);
 					rangeList.push(wordRange);
+
 				}
 			} while (startingIndex !== -1);
 
@@ -77,8 +92,15 @@
 			} while (window.find(word, false, false, false, false, false, false));
 			// reset scroll position, window.find() will select the last word...
 			window.scrollTo(0, 0);
+			console.log("here--->",word);
+			word_count ++;
+            console.log("word_count-->",word_count);
+            word_stuff.push(word);
+
+            console.log("word_stuff -->",word_stuff);
+
 		} else {
-			console.log("[highlightWordAcrossNode] nothing found", word, bgColorCode, document.title);
+			//console.log("highlightWordAcrossNode --> nothing found", word, bgColorCode, document.title);
 		}
 
 		// highlight all ranges
@@ -132,27 +154,12 @@
 
 		if (!wordGroupsDict.wordGroupsDict) return;
 		else wordGroupsDict = wordGroupsDict.wordGroupsDict;
-
-		// highlightAllWords(wordGroupsDict);
-		// body may not loaded... hard-code some delay
 		setTimeout(highlightAllWords, 500, wordGroupsDict);
 
-		// may use observer to due with it
-		// var observer = new MutationObserver(function(mutations) {
-		// 	mutations.forEach(function(mutation) {
-		// 		console.log(mutation);
-		// 	});
-		// })
-		// var minConfig = { attributes: true, childList: true, characterData: true };
-		// minConfig.subtree = true;
-		// observer.observe(document.body, minConfig);
 	});
 
 	// on word list change
 	chrome.runtime.onMessage.addListener(function (messageBody, sender, sendResponse) {
-
-		// console.log(sender.tab ? "from a content script:" + sender.tab.url : "from the extension");
-
 		// remove all highlight first
 		[].slice.call(document.getElementsByClassName("chrome-extension-highlight")).forEach(function (e) {
 			var parentNode = e.parentNode;

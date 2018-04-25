@@ -5,13 +5,43 @@
 	<title>Keyword Extension</title>
 	<link href="css/popup.css" media="screen" rel="stylesheet" type="text/css">
 	<link href="css/toggle.css" media="screen" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/button-action.js"></script>
+    <script>
+        /**function setColor(btn, color){
+            var property = document.getElementById(btn);
+            var text = document.getElementById('new-group-color');
+            text.value += color;
+        }*/
+
+
+    </script>
+
+
+    <script type="text/javascript">
+        $(function () {
+            $('#button_red').on('click', function () {
+                var text = $('#text');
+                text.val(text.val() + ' after clicking');
+            });
+        });
+    </script>
+
+
+
+
 </head>
 <body>
-	<main id="mainBlock">
+
+<main id="mainBlock">
 		<div class="button-block">
 			<form id="new-group-form">
-                <h3x>Im here</h3x>
-				<input id="new-group-color" type="text" pattern="[0-9a-fA-f]{6}" title="hex color code" />
+                <h3>Please remember to place a space at the end of each word to avoid errors.</h3>
+                <button style="background-color: #F44336" id="button_red" onclick="setColor('button_red', 'F44336')"> red </button>
+                <button style="background-color: #2196F3" id="button_blue" onclick="setColor('button_blue', '2196F3')"> blue </button>
+                <button style="background-color: #FFEB3B" id="button_yellow" onclick="setColor('button_yellow', 'FFEB3B')"> yellow </button>
+
+				<input value=" " id="new-group-color" type="text" pattern="[0-9a-fA-f]{6}" title="hex color code" />
 				<input id="add-button" class="button" type="submit" value="+" title="add group" />
 			</form>
 		</div>
@@ -30,5 +60,10 @@
 	</main>
 
 	<script src="js/popup.js"></script>
+
+
+
 </body>
+
+
 </html>
