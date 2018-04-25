@@ -98,6 +98,9 @@
             word_stuff.push(word);
 
             console.log("word_stuff -->",word_stuff);
+            var word_container = document.getElementById("filler");
+            var word_value = document.createTextNode("hahaha");
+            word_container.appendChild(word_value);
 
 		} else {
 			//console.log("highlightWordAcrossNode --> nothing found", word, bgColorCode, document.title);
